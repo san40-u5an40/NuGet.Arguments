@@ -1,7 +1,7 @@
 ﻿/// <summary>
 /// Класс, хранящий сведения об успешном вводе пользователем аргументов командной строки
 /// </summary>
-public class SuccessArguments
+public class SuccessArguments : IEnumerable<string>
 {
     private readonly List<ArgumentBase> args;
     private readonly HashSet<string> optional;
@@ -31,6 +31,16 @@ public class SuccessArguments
                 return args[index].Arg!;
         }
     }
+
+    /// <summary>
+    /// Перебираемая коллекция аргументов
+    /// </summary>
+    /// <returns>Перечень аргументов, которые успешно прошли проверку</returns>
+    public IEnumerator<string> GetEnumerator() =>
+        args.Select(p => p.Arg).GetEnumerator()!;
+
+    IEnumerator IEnumerable.GetEnumerator() =>
+        GetEnumerator();
 
     /// <summary>
     /// Проверка на наличие опциональных аргументов

@@ -11,6 +11,8 @@ public class ArgumentsBuilder
     private Dictionary<string, Section> sections = [];
     private bool isSingleSectionMode = false;
 
+    private bool isBuilded = false;
+
     /// <summary>
     /// Конструктор создания обработчика аргументов командной строки
     /// </summary>
@@ -22,12 +24,7 @@ public class ArgumentsBuilder
     /// Конструктор создания обработчика аргументов командной строки
     /// </summary>
     public ArgumentsBuilder() =>
-        this.args = Environment.GetCommandLineArgs();
-
-    /// <summary>
-    /// Количество аргументов командной строки (при работе в режиме нескольких секций аргумент самой секции не учитывается)
-    /// </summary>
-    public int Count => isSingleSectionMode ? args.Length : args.Length - 1;
+        this.args = Environment.GetCommandLineArgs()[1..];
 
     /// <summary>
     /// Добавление секции/команды
@@ -72,19 +69,19 @@ public class ArgumentsBuilder
     /// Основной метод обработки полученных значений командной строки
     /// </summary>
     /// <returns>
-    /// Возвращает объект IValidable, который может быть представлен в виде 2-х типов:<br>
-    /// - FailureArguments — Некорректный ввод аргументов пользователем<br>
-    /// - SuccessArguments — Корректный ввод<br>
+    /// Возвращает ResultArguments
     /// </returns>
-    /// <exception cref="InvalidOperationException">Отсутствие сценариев для обработки аргументов командной строки</exception>
-    /// <exception cref="FormatException">Наличие аргумента в конце сценария в виде произвольного текста и опциональных аргумента</exception>
+    /// <exception cref="InvalidOperationException">Обработчик уже был собран, или отсутствуют сценарии для обработки аргументов командной строки</exception>
+    /// <exception cref="FormatException">Не уникальность опциональных паттернов или наличие секций, в которых есть опциональные паттерны, и которые заканчиваются на обязательном аргументе произвольного текста (такой кейс может вызвать неоднозначность)</exception>
     public ResultArguments Build()
     {
         // Сначала идут стандартные проверки:
-        // На корректность составления секций (Compile-Time Exception)
+        // Compile-Time Exceptions
         // На наличие аргументов
 
-        ThrowIfInvalidSections();
+        ThrowIfInvalid();
+
+        isBuilded = true;
 
         if (args.Length == 0)
             return ResultArguments.CreateFailure("Аргументы не были указаны", FailureArgumentsType.Zero);
@@ -142,7 +139,7 @@ public class ArgumentsBuilder
 
             if (!optionalPair[currentArgument].IsValid(nextArgument))
             {
-                string errorMessage = FormatIfValid(optionalPair[currentArgument].ErrorMessage, nextArgument);
+                string errorMessage = FormatErrorIfValid(optionalPair[currentArgument].ErrorMessage, nextArgument);
                 return ResultArguments.CreateFailure(errorMessage, FailureArgumentsType.OptionalPairMistake);
             }
             
@@ -169,11 +166,15 @@ public class ArgumentsBuilder
     }
 
     // Стандартные проверки:
+    // - Был ли уже собран обработчик
     // - На наличие созданных сценариев
     // - На наличие секций, где пересекаются паттерны опциональных аргументов с паттернами опциональных пар
     // - На корректность сценариев (по признаку окончания на произвольное строковое значение и наличие опциональных аргументов, такой кейс может вызвать неоднозначность)
-    private void ThrowIfInvalidSections()
+    private void ThrowIfInvalid()
     {
+        if (isBuilded)
+            throw new InvalidOperationException("Данный обработчик аргументов уже был собран. Допускается только одноразовая сборка.");
+
         if (sections.Count == 0)
             throw new InvalidOperationException("Для корректной работы \"ArgumentsBuilder.Build()\" необходимо создать сценарии. Со справочными сведениями можно ознакомиться по ссылке: https://github.com/san40-u5an40/NuGet.Arguments");
 
@@ -188,7 +189,7 @@ public class ArgumentsBuilder
     }
 
     // Интерполяция с помощью string.Format, если строка для этого подходит
-    private string FormatIfValid(string errorMessage, string argument)
+    private string FormatErrorIfValid(string errorMessage, string argument)
     {
         if (Regex.IsMatch(errorMessage, @"^[^{}]*\{0\}[^{}]*$", RegexOptions.Compiled))
             return string.Format(errorMessage, argument);
