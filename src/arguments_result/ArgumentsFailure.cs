@@ -1,9 +1,9 @@
 ﻿/// <summary>
 /// Класс, хранящий сведенья об ошибочном вводе пользователем аргументов
 /// </summary>
-public class FailureArguments
+public class ArgumentsFailure
 {
-    internal FailureArguments(string errorMessage, FailureArgumentsType type) => 
+    internal ArgumentsFailure(string errorMessage, ArgumentsFailureType type) => 
         (Message, Type) = (errorMessage, type);
 
     /// <summary>
@@ -14,7 +14,7 @@ public class FailureArguments
     /// <summary>
     /// Тип ошибки ввода аргументов
     /// </summary>
-    public FailureArgumentsType Type { get; private init; }
+    public ArgumentsFailureType Type { get; private init; }
 
     // Для упрощённого вывода ошибки в консоль
     public override string ToString() => Message;

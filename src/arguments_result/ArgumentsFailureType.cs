@@ -3,7 +3,7 @@
 /// <summary>
 /// Тип ошибки ввода аргументов
 /// </summary>
-public enum FailureArgumentsType : ushort
+public enum ArgumentsFailureType : ushort
 {
     Zero                 = 0, // Отсутствие всех аргументов
     Section              = 1, // Указана неверная секция/команда

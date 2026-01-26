@@ -1,13 +1,13 @@
 ﻿/// <summary>
 /// Класс, хранящий сведения об успешном вводе пользователем аргументов командной строки
 /// </summary>
-public class SuccessArguments : IEnumerable<string>
+public class ArgumentsSuccess : IEnumerable<string>
 {
     private readonly List<ArgumentBase> args;
     private readonly HashSet<string> optional;
     private readonly Dictionary<string, string> optionalPair;
 
-    internal SuccessArguments(string sectionName, List<ArgumentBase> args, HashSet<string> optional, Dictionary<string, string> optionalPair) =>
+    internal ArgumentsSuccess(string sectionName, List<ArgumentBase> args, HashSet<string> optional, Dictionary<string, string> optionalPair) =>
         (this.Section, this.args, this.optional, this.optionalPair) = (sectionName, args, optional, optionalPair);
 
     /// <summary>

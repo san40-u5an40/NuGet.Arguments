@@ -73,7 +73,7 @@ public class ArgumentsBuilder
     /// </returns>
     /// <exception cref="InvalidOperationException">Обработчик уже был собран, или отсутствуют сценарии для обработки аргументов командной строки</exception>
     /// <exception cref="FormatException">Не уникальность опциональных паттернов или наличие секций, в которых есть опциональные паттерны, и которые заканчиваются на обязательном аргументе произвольного текста (такой кейс может вызвать неоднозначность)</exception>
-    public ResultArguments Build()
+    public ArgumentsResult Build()
     {
         // Сначала идут стандартные проверки:
         // Compile-Time Exceptions
@@ -84,7 +84,7 @@ public class ArgumentsBuilder
         isBuilded = true;
 
         if (args.Length == 0)
-            return ResultArguments.CreateFailure("Аргументы не были указаны", FailureArgumentsType.Zero);
+            return ArgumentsResult.CreateFailure("Аргументы не были указаны", ArgumentsFailureType.Zero);
 
         // Затем определяется секция и её имя
         // Если это режим одиночной секции, то имя одно и уже известно
@@ -101,7 +101,7 @@ public class ArgumentsBuilder
             sectionName = args[0];
 
             if (!sections.TryGetValue(sectionName, out section))
-                return ResultArguments.CreateFailure($"Сценарий для '{sectionName}' не был найден", FailureArgumentsType.Section);
+                return ArgumentsResult.CreateFailure($"Сценарий для '{sectionName}' не был найден", ArgumentsFailureType.Section);
 
             section.Binding.RemoveAt(0);
         }
@@ -114,9 +114,9 @@ public class ArgumentsBuilder
 
         var bindings = section.Binding;
         if (bindings.Any(p => p.Arg == null))
-            return ResultArguments.CreateFailure("Отсутствуют некоторые обязательные аргументы", FailureArgumentsType.Lack);
-        if (!bindings.All(p => p.IsValid == true))
-            return ResultArguments.CreateFailure(section.Binding.First(p => p.IsValid == false).ErrorMessage, FailureArgumentsType.BindingMistake);
+            return ArgumentsResult.CreateFailure("Отсутствуют некоторые обязательные аргументы", ArgumentsFailureType.Lack);
+        if (bindings.Any(p => p.IsValid == false))
+            return ArgumentsResult.CreateFailure(section.Binding.First(p => p.IsValid == false).ErrorMessage, ArgumentsFailureType.BindingMistake);
 
         // Проверка опциональных пар
         // 
@@ -140,7 +140,7 @@ public class ArgumentsBuilder
             if (!optionalPair[currentArgument].IsValid(nextArgument))
             {
                 string errorMessage = FormatErrorIfValid(optionalPair[currentArgument].ErrorMessage, nextArgument);
-                return ResultArguments.CreateFailure(errorMessage, FailureArgumentsType.OptionalPairMistake);
+                return ArgumentsResult.CreateFailure(errorMessage, ArgumentsFailureType.OptionalPairMistake);
             }
             
             tempOptionalPair.Add(currentArgument, nextArgument);
@@ -160,9 +160,9 @@ public class ArgumentsBuilder
 
         remainderArguments = remainderArguments.Except(tempOptional).ToList();
         if (remainderArguments.Count == 0)
-            return ResultArguments.CreateSuccess(sectionName, section.Binding, tempOptional, tempOptionalPair);
+            return ArgumentsResult.CreateSuccess(sectionName, section.Binding, tempOptional, tempOptionalPair);
         else
-            return ResultArguments.CreateFailure($"Указаны лишние аргументы: '{string.Join("', '", remainderArguments)}'", FailureArgumentsType.Excess);
+            return ArgumentsResult.CreateFailure($"Указаны лишние аргументы: '{string.Join("', '", remainderArguments)}'", ArgumentsFailureType.Excess);
     }
 
     // Стандартные проверки:
