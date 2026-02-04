@@ -191,7 +191,7 @@ public class ArgumentsBuilder
     // Интерполяция с помощью string.Format, если строка для этого подходит
     private string FormatErrorIfValid(string errorMessage, string argument)
     {
-        if (Regex.IsMatch(errorMessage, @"^[^{}]*\{0\}[^{}]*$", RegexOptions.Compiled))
+        if (Regex.IsMatch(errorMessage, @"^[^{}]*\{0\}[^{}]*$", RegexOptions.Compiled, TimeSpan.FromMilliseconds(100)))
             return string.Format(errorMessage, argument);
 
         return errorMessage;

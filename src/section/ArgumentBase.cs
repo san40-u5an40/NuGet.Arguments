@@ -21,7 +21,7 @@ internal abstract class ArgumentBase
             if (Arg == null)
                 return DefaultErrorMessages.Void;
 
-            if (Regex.IsMatch(field, @"^[^{}]*\{0\}[^{}]*$", RegexOptions.Compiled))
+            if (Regex.IsMatch(field, @"^[^{}]*\{0\}[^{}]*$", RegexOptions.Compiled, TimeSpan.FromMilliseconds(100)))
                 return string.Format(field, Arg);
 
             return field;
