@@ -4,49 +4,45 @@
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn>
 
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
+    <AssemblyVersion>1.1.9.0</AssemblyVersion>
+    <FileVersion>1.1.9.0</FileVersion>
+    <Version>1.1.9</Version>
 	  
     <Title>Command-line handler</Title>
     <Description>The library is for easy handling of command-line arguments</Description>
     <Authors>san40_u5an40</Authors>
-
-    <AssemblyVersion>1.1.8.0</AssemblyVersion>
-    <FileVersion>1.1.8.0</FileVersion>
-    <Version>1.1.8</Version>
-
+	  
+    <IsPackable>true</IsPackable>
     <PackageId>san40_u5an40.$(AssemblyName)</PackageId>
+    <PackageTags>argument;arguments;console;terminal;cli;аргументы;консоль</PackageTags>
     <PackageIcon>icon.png</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PackageTags>argument;arguments;console;terminal;cli;аргументы;консоль</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageOutputPath>..\..\_Releases</PackageOutputPath>
     <PackageProjectUrl>https://github.com/san40-u5an40/NuGet.Arguments</PackageProjectUrl>
     <RepositoryUrl>https://github.com/san40-u5an40/NuGet.Arguments</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageOutputPath>..\..\_Releases</PackageOutputPath>
-    <PackageLicenseFile>LICENSE</PackageLicenseFile>
     
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <EmbedAllSources>true</EmbedAllSources>
-    <EmbedUntrackedSources>false</EmbedUntrackedSources>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
 	  
     <Deterministic>true</Deterministic>
     <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
-    <PathMap>$(MSBuildProjectDirectory)=/src/</PathMap>
     <DeterministicSourcePaths>true</DeterministicSourcePaths>
     <UseHostCompilerIfAvailable>false</UseHostCompilerIfAvailable>
     
-    <IncludeSymbols>true</IncludeSymbols>
-    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <DebugSymbols>true</DebugSymbols>
     <DebugType>portable</DebugType>
+    <PublishWindowsPdb>false</PublishWindowsPdb>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
 
   <ItemGroup>
     <None Include="..\icons\icon.png">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-    <None Include="..\LICENSE">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
@@ -59,4 +55,5 @@
 	<ItemGroup>
 		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
     </ItemGroup>
+	
 </Project>
