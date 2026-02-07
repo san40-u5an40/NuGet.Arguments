@@ -165,6 +165,7 @@ public class Section
     /// </summary>
     /// <param name="pattern">Строковый паттерн аргумента</param>
     /// <param name="predicate">Значение, введённое пользователем</param>
+    /// <param name="errorMessage">Сообщение об ошибке</param>
     /// <returns>Тот же экземпляр секции (fluent API)</returns>
     public Section AddOptionalPair(string pattern, Predicate<string> predicate, string errorMessage)
     {

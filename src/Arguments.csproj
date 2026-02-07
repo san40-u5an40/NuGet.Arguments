@@ -7,9 +7,12 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <NoWarn>$(NoWarn);1591</NoWarn>
 
-    <AssemblyVersion>1.1.9.0</AssemblyVersion>
-    <FileVersion>1.1.9.0</FileVersion>
-    <Version>1.1.9</Version>
+    <AssemblyVersion>1.1.10.0</AssemblyVersion>
+    <FileVersion>1.1.10.0</FileVersion>
+    <Version>1.1.10</Version>
+    <PackageReleaseNotes>
+		Исправлены комментарии для IntelliSense
+    </PackageReleaseNotes>
 	  
     <Title>Command-line handler</Title>
     <Description>The library is for easy handling of command-line arguments</Description>

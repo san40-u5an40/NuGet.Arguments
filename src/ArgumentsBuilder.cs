@@ -283,6 +283,7 @@ public class ArgumentsBuilder
     /// </summary>
     /// <param name="pattern">Строковый паттерн аргумента</param>
     /// <param name="predicate">Значение, введённое пользователем</param>
+    /// <param name="errorMessage">Сообщение об ошибке</param>
     /// <returns>Тот же экземпляр ArgumentsBuilder</returns>
     public ArgumentsBuilder AddOptionalPair(string pattern, Predicate<string> predicate, string errorMessage) =>
         AddArgument(p => p.AddOptionalPair(pattern, predicate, errorMessage));
