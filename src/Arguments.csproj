@@ -18,17 +18,19 @@
     <PackageOutputPath>..\..\_Releases</PackageOutputPath>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <Description>The library is for easy handling of command-line arguments</Description>
-    <Version>1.1.4</Version>
-    <AssemblyVersion>1.1.4.0</AssemblyVersion>
-    <FileVersion>1.1.4.0</FileVersion>
+    <Version>1.1.5</Version>
+    <AssemblyVersion>1.1.5.0</AssemblyVersion>
+    <FileVersion>1.1.5.0</FileVersion>
     
-    <Deterministic>true</Deterministic>
-    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
-    <PathMap>$(MSBuildProjectDirectory)=_</PathMap>
-    <LangVersion>latest</LangVersion>
-
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <EmbedAllSources>true</EmbedAllSources>
+	  
+    <Deterministic>true</Deterministic>
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+    <PathMap>$(MSBuildProjectDirectory)=/src/</PathMap>
+    <DeterministicSourcePaths>true</DeterministicSourcePaths>
+    <UseHostCompilerIfAvailable>false</UseHostCompilerIfAvailable>
+    <DebugType>portable</DebugType>
     
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
