@@ -4,23 +4,26 @@
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>enable</Nullable>
+
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
 	  
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <PackageId>san40_u5an40.$(AssemblyName)</PackageId>
     <Title>Command-line handler</Title>
+    <Description>The library is for easy handling of command-line arguments</Description>
     <Authors>san40_u5an40</Authors>
+
+    <AssemblyVersion>1.1.7.0</AssemblyVersion>
+    <FileVersion>1.1.7.0</FileVersion>
+    <Version>1.1.7</Version>
+
+    <PackageId>san40_u5an40.$(AssemblyName)</PackageId>
     <PackageIcon>icon.png</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageTags>argument;arguments;console;terminal;cli;аргументы;консоль</PackageTags>
-    <RepositoryUrl>https://github.com/san40-u5an40/NuGet.Arguments</RepositoryUrl>
     <PackageProjectUrl>https://github.com/san40-u5an40/NuGet.Arguments</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/san40-u5an40/NuGet.Arguments</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageOutputPath>..\..\_Releases</PackageOutputPath>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <Description>The library is for easy handling of command-line arguments</Description>
-    <Version>1.1.6</Version>
-    <AssemblyVersion>1.1.6.0</AssemblyVersion>
-    <FileVersion>1.1.6.0</FileVersion>
     
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <EmbedAllSources>true</EmbedAllSources>
@@ -31,10 +34,10 @@
     <PathMap>$(MSBuildProjectDirectory)=/src/</PathMap>
     <DeterministicSourcePaths>true</DeterministicSourcePaths>
     <UseHostCompilerIfAvailable>false</UseHostCompilerIfAvailable>
-    <DebugType>portable</DebugType>
     
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <DebugType>portable</DebugType>
   </PropertyGroup>
 
   <ItemGroup>
@@ -55,5 +58,4 @@
 	<ItemGroup>
 		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
     </ItemGroup>
-
 </Project>
