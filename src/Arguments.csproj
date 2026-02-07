@@ -8,23 +8,30 @@
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageId>san40_u5an40.$(AssemblyName)</PackageId>
     <Title>Command-line handler</Title>
-    <Version>1.1.2</Version>
     <Authors>san40_u5an40</Authors>
     <PackageIcon>icon.png</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageTags>argument;arguments;console;terminal;cli;аргументы;консоль</PackageTags>
     <RepositoryUrl>https://github.com/san40-u5an40/NuGet.Arguments</RepositoryUrl>
     <PackageProjectUrl>https://github.com/san40-u5an40/NuGet.Arguments</PackageProjectUrl>
     <RepositoryType>git</RepositoryType>
     <PackageOutputPath>..\..\_Releases</PackageOutputPath>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <Description>The library is for easy handling of command-line arguments</Description>
-
-    <PublishRepositoryUrl>true</PublishRepositoryUrl>
-    <EmbedUntrackedSources>true</EmbedUntrackedSources>
-    <IncludeSymbols>true</IncludeSymbols>
-    <IncludeSource>true</IncludeSource>
-    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <Version>1.1.3</Version>
+    <AssemblyVersion>1.1.3.0</AssemblyVersion>
+    <FileVersion>1.1.3.0</FileVersion>
+    
     <Deterministic>true</Deterministic>
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+    <PathMap>$(MSBuildProjectDirectory)=_</PathMap>
+    <LangVersion>latest</LangVersion>
+    
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedAllSources>true</EmbedAllSources>
+    
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
 
   <ItemGroup>
